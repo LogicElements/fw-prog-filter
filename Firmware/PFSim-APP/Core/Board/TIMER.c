@@ -1,6 +1,7 @@
 
 
 #include "configuration.h"
+#include "main.h"
 #include "TIMER.h"
 
 

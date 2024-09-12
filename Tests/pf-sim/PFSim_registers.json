@@ -422,7 +422,7 @@
     "Id":83923280, 
     "VarType":"INT", 
     "Access":"RW", 
-    "Description":"Write 0 for reset", 
+    "Description":"Write 0 for reset. Switches off the power supply to the filters for 100ms.", 
     "Value":"1",
     "NewValue":"1",
     "Reset":"1",

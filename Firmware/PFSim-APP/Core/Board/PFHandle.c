@@ -29,7 +29,7 @@ void PFInit(void)
 	pf_app.LPfrequency = 0;
 	pf_app.HPfrequency = 0;
 	pf_app.FreqRatioLP = 32;
-	pf_app.FreqRatioHP = 100;
+	pf_app.FreqRatioHP = 250;
 
 	pf_app.previous_reset_state = 0;
 	pf_app.current_reset_state = 0;
@@ -71,7 +71,7 @@ void PFHande(void)
 	// high pass frequency setting
 	if(conf.pf.cutoff_hp != pf_app.HPfrequency)
 	{
-	    if (conf.pf.cutoff_hp >= 1000 && conf.pf.cutoff_hp <= 10000)
+	    if (conf.pf.cutoff_hp >= 300 && conf.pf.cutoff_hp <= 10000)
 	    {
 	    MX_TIM_Set(TIMER_3, TIM_CHANNEL_1, conf.pf.cutoff_hp*pf_app.FreqRatioHP);
 		pf_app.HPfrequency = conf.pf.cutoff_hp;
@@ -81,7 +81,7 @@ void PFHande(void)
 	// low pass frequency setting
 	if(conf.pf.cutoff_lp != pf_app.LPfrequency)
 	{
-		if(conf.pf.cutoff_lp >= 10 && conf.pf.cutoff_lp <= 320)
+		if(conf.pf.cutoff_lp >= 20 && conf.pf.cutoff_lp <= 320)
 		{
 		 MX_TIM_Set(TIMER_1, TIM_CHANNEL_1, conf.pf.cutoff_lp*pf_app.FreqRatioLP*1000);
 		 pf_app.LPfrequency =  conf.pf.cutoff_lp;
@@ -92,7 +92,6 @@ void PFHande(void)
 	resetPFState();
 
 }
-
 
 
 // reset power supply for filters

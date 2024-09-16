@@ -78,7 +78,7 @@ Status_t RegMap_RestoreFactoryValues(void)
   CONF_SHORT(CONF_COM_MB_ADDRESS)        = 32;
   CONF_SHORT(CONF_COM_MB_TIMEOUT)        = 10;
   CONF_INT(CONF_PF_CUTOFF_LP)            = 100;
-  CONF_INT(CONF_PF_CUTOFF_HP)            = 1000;
+  CONF_INT(CONF_PF_CUTOFF_HP)            = 500;
   CONF_BYTE(CONF_PF_MODE)                = 0;
   CONF_BYTE(CONF_PF_RESET)               = 1;
 

@@ -77,7 +77,12 @@ void Error_Handler(void);
 #define LED_G_Pin LL_GPIO_PIN_9
 #define LED_G_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
-
+#define SW1_Pin GPIO_PIN_11
+#define SW1_GPIO_Port GPIOB
+#define SW2_Pin GPIO_PIN_10
+#define SW2_GPIO_Port GPIOB
+#define EN_5V_Pin GPIO_PIN_10
+#define EN_5V_GPIO_Port GPIOA
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

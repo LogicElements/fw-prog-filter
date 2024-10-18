@@ -15,7 +15,7 @@
 /**
  * SIR1 project target device ID
  */
-#define CONF_TARGET_DEVICE            9153
+#define CONF_TARGET_DEVICE            8753
 
 /* Private macros  -----------------------------------------------------------*/
 /* Private typedefs ----------------------------------------------------------*/

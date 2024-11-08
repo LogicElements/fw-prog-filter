@@ -36,7 +36,7 @@ const uint32_t __attribute__((section (".sectionFwInfo"))) CONF_FACTORY_INFO[8] 
     0xffffffff,     // Default serial number
     CONF_TARGET_DEVICE,   // Default device ID
     1001,   // Default Hardware revision
-    1001,   // Default Bootloader revision
+    1002,   // Default Bootloader revision
     CONF_TARGET_DEVICE,   // Default SN prefix
     0xFFFFFFFF,
     0xFFFFFFFF, 0xFFFFFFFF,  //

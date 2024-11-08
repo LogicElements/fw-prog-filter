@@ -29,14 +29,14 @@ int main(void)
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
+  /* Configure the system clock */
+  SystemClock_Config();
+
   /* Hardware init - enable 5 V and signal bypass */
+  LL_GPIO_SetOutputPin(EN_5V_GPIO_Port, EN_5V_Pin);
   LL_GPIO_SetPinMode(SW1_GPIO_Port, SW1_Pin, LL_GPIO_MODE_OUTPUT);
   LL_GPIO_SetPinMode(SW2_GPIO_Port, SW2_Pin, LL_GPIO_MODE_OUTPUT);
   LL_GPIO_SetPinMode(EN_5V_GPIO_Port, EN_5V_Pin, LL_GPIO_MODE_OUTPUT);
-  LL_GPIO_SetOutputPin(EN_5V_GPIO_Port, EN_5V_Pin);
-
-  /* Configure the system clock */
-  SystemClock_Config();
 
   Led_Init();
   Btl_Init();

@@ -26,6 +26,11 @@ static PF_t pf_app;
 
 void PFInit(void)
 {
+  /* Restore default values */
+  conf.pf.cutoff_hp = conf.pf.def_cutoff_hp;
+  conf.pf.cutoff_lp = conf.pf.def_cutoff_lp;
+  conf.pf.mode = conf.pf.def_mode;
+
 	pf_app.LPfrequency = 0;
 	pf_app.HPfrequency = 0;
 	pf_app.FreqRatioLP = 32;
@@ -40,56 +45,49 @@ void PFInit(void)
 
 void PFHande(void)
 {
-	switch(conf.pf.mode)
-	{
+  uint32_t lp_req = conf.pf.cutoff_lp;
+  uint32_t hp_req = conf.pf.cutoff_hp;
 
-	case 0: //active low pass
-		HAL_GPIO_WritePin(SW1_GPIO_Port, SW1_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(SW2_GPIO_Port, SW2_Pin, GPIO_PIN_SET);
-		break;
-	case 1: //active high pass filter and 100 kHz LP
+  switch (conf.pf.mode)
+  {
+    case 0: //active low pass
+      HAL_GPIO_WritePin(SW1_GPIO_Port, SW1_Pin, GPIO_PIN_RESET);
+      HAL_GPIO_WritePin(SW2_GPIO_Port, SW2_Pin, GPIO_PIN_SET);
+      break;
 
-		HAL_GPIO_WritePin(SW1_GPIO_Port, SW1_Pin, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(SW2_GPIO_Port, SW2_Pin, GPIO_PIN_SET);
-		MX_TIM_Set(TIMER_1, TIM_CHANNEL_1, 100*pf_app.FreqRatioLP*1000);
+    case 1: //active high pass filter and 100 kHz LP
+      HAL_GPIO_WritePin(SW1_GPIO_Port, SW1_Pin, GPIO_PIN_SET);
+      HAL_GPIO_WritePin(SW2_GPIO_Port, SW2_Pin, GPIO_PIN_SET);
+      lp_req = 100;
+      break;
 
-		break;
-	case 2: //bandpass
-		HAL_GPIO_WritePin(SW1_GPIO_Port, SW1_Pin, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(SW2_GPIO_Port, SW2_Pin, GPIO_PIN_SET);
-		break;
-	case 3: //bypass both filters
-		HAL_GPIO_WritePin(SW1_GPIO_Port, SW1_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(SW2_GPIO_Port, SW2_Pin, GPIO_PIN_RESET);
-		break;
-	default:
-		break;
-	}
+    case 2: //bandpass
+      HAL_GPIO_WritePin(SW1_GPIO_Port, SW1_Pin, GPIO_PIN_SET);
+      HAL_GPIO_WritePin(SW2_GPIO_Port, SW2_Pin, GPIO_PIN_SET);
+      break;
 
-
+    default:
+    case 3: //bypass both filters
+      HAL_GPIO_WritePin(SW1_GPIO_Port, SW1_Pin, GPIO_PIN_RESET);
+      HAL_GPIO_WritePin(SW2_GPIO_Port, SW2_Pin, GPIO_PIN_RESET);
+      break;
+  }
 
 	// high pass frequency setting
-	if(conf.pf.cutoff_hp != pf_app.HPfrequency)
-	{
-	    if (conf.pf.cutoff_hp >= 300 && conf.pf.cutoff_hp <= 10000)
-	    {
-	    MX_TIM_Set(TIMER_3, TIM_CHANNEL_1, conf.pf.cutoff_hp*pf_app.FreqRatioHP);
-		pf_app.HPfrequency = conf.pf.cutoff_hp;
-	    }
-	}
+  if (hp_req != pf_app.HPfrequency)
+  {
+    MX_TIM_Set(TIMER_3, TIM_CHANNEL_1, hp_req * pf_app.FreqRatioHP);
+    pf_app.HPfrequency = hp_req;
+  }
 
-	// low pass frequency setting
-	if(conf.pf.cutoff_lp != pf_app.LPfrequency)
-	{
-		if(conf.pf.cutoff_lp >= 20 && conf.pf.cutoff_lp <= 320)
-		{
-		 MX_TIM_Set(TIMER_1, TIM_CHANNEL_1, conf.pf.cutoff_lp*pf_app.FreqRatioLP*1000);
-		 pf_app.LPfrequency =  conf.pf.cutoff_lp;
-		}
+  // low pass frequency setting
+  if (lp_req != pf_app.LPfrequency)
+  {
+    MX_TIM_Set(TIMER_1, TIM_CHANNEL_1, lp_req * pf_app.FreqRatioLP * 1000);
+    pf_app.LPfrequency = lp_req;
+  }
 
-	}
-
-	resetPFState();
+  resetPFState();
 
 }
 

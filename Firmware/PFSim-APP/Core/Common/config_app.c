@@ -57,6 +57,16 @@ Status_t Config_Callback(uint32_t id)
 #endif
       break;
 
+    case CONF_BLOCK_ID(CONF_PF_CUTOFF_HP):
+      SAT_UP_DN(conf.pf.cutoff_lp, 320, 20);
+      SAT_UP_DN(conf.pf.cutoff_hp, 10000, 300);
+      SAT_UP_DN(conf.pf.mode, PF_NP, 0);
+
+      SAT_UP_DN(conf.pf.def_cutoff_lp, 320, 20);
+      SAT_UP_DN(conf.pf.def_cutoff_hp, 10000, 300);
+      SAT_UP_DN(conf.pf.def_mode, DEF_NP, 0);
+      break;
+
 
     default:
       break;

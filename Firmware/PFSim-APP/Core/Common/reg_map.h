@@ -80,6 +80,10 @@
 #define CONF_PF_CUTOFF_HP          0x05004152u  ///< HP cutoff frequency
 #define CONF_PF_MODE               0x05008550u  ///< Filters mode
 #define CONF_PF_RESET              0x05009150u  ///< Reset filters
+#define CONF_PF_RESERVED           0x0500A151u  ///< Reserved
+#define CONF_PF_DEF_CUTOFF_LP      0x0500C172u  ///< Default LP cutoff f
+#define CONF_PF_DEF_CUTOFF_HP      0x05010172u  ///< Default HP cutoff f
+#define CONF_PF_DEF_MODE           0x05014570u  ///< Filters mode
 #define CONF_DBG_WRITES_CONF       0x06000112u  ///< Configuration writes
 
 
@@ -112,14 +116,14 @@
 #define CONF_REG_LOGGER_NUMBER     (0)
 #define CONF_REG_CALIB_NUMBER      (1)
 #define CONF_REG_SYNCED_NUMBER     (0)
-#define CONF_REG_FLASH_NUMBER      (5)
+#define CONF_REG_FLASH_NUMBER      (8)
 #define CONF_REG_LOGGER_LENGTH     (0)
 #define CONF_REG_CALIB_LENGTH      (8)
 #define CONF_REG_SYNCED_LENGTH     (0)
-#define CONF_REG_FLASH_LENGTH      (29)
+#define CONF_REG_FLASH_LENGTH      (50)
 #define CONF_REG_LOCAL_LENGTH      (0)
 
-#define CONF_DIM_CONDITION ((sizeof(conf_reg_sys_t) != 24) || (sizeof(conf_reg_fact_t) != 16) || (sizeof(conf_reg_firm_t) != 8) || (sizeof(conf_reg_com_t) != 12) || (sizeof(conf_reg_pf_t) != 12) || (sizeof(conf_reg_dbg_t) != 4) || 0)
+#define CONF_DIM_CONDITION ((sizeof(conf_reg_sys_t) != 24) || (sizeof(conf_reg_fact_t) != 16) || (sizeof(conf_reg_firm_t) != 8) || (sizeof(conf_reg_com_t) != 12) || (sizeof(conf_reg_pf_t) != 24) || (sizeof(conf_reg_dbg_t) != 4) || 0)
 
 
 /** @} */
@@ -167,6 +171,14 @@ typedef enum
   PF_NP = 3,
 }pf_mode_t ;
 
+typedef enum
+{
+  DEF_LP = 0,
+  DEF_HP = 1,
+  DEF_BP = 2,
+  DEF_NP = 3,
+}pf_def_mode_t ;
+
 typedef struct __packed __aligned(4)
 {
   uint32_t uptime;
@@ -208,6 +220,10 @@ typedef struct __packed __aligned(4)
   uint32_t cutoff_hp;
   pf_mode_t mode;
   uint8_t reset;
+  uint16_t reserved;
+  uint32_t def_cutoff_lp;
+  uint32_t def_cutoff_hp;
+  pf_def_mode_t def_mode;
 }conf_reg_pf_t;
 
 typedef struct __packed __aligned(4)
@@ -263,4 +279,3 @@ Status_t RegMap_RestoreFactoryValues(void);
 
 #endif /* REG_MAP_H_ */
 /** @} */
-

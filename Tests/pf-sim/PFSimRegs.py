@@ -22,6 +22,10 @@
     PF_CUTOFF_HP = "PF_CUTOFF_HP"
     PF_MODE = "PF_MODE"
     PF_RESET = "PF_RESET"
+    PF_RESERVED = "PF_RESERVED"
+    PF_DEF_CUTOFF_LP = "PF_DEF_CUTOFF_LP"
+    PF_DEF_CUTOFF_HP = "PF_DEF_CUTOFF_HP"
+    PF_DEF_MODE = "PF_DEF_MODE"
     DBG_WRITES_CONF = "DBG_WRITES_CONF"
 
 
@@ -49,5 +53,12 @@ class PF_MODE:
     PF_HP = 1
     PF_BP = 2
     PF_NP = 3
+
+
+class PF_DEF_MODE:
+    DEF_LP = 0
+    DEF_HP = 1
+    DEF_BP = 2
+    DEF_NP = 3
 
 

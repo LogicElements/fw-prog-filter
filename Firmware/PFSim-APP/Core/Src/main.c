@@ -41,7 +41,6 @@
 #include "led.h"
 #include "PFHandle.h"
 #include "TIMER.h"
-#include "DevInit.h"
 
 
 extern TIM_HandleTypeDef htim1;
@@ -133,8 +132,6 @@ int main(void)
   Switch_Init();
   Control_Init();
   PFInit();
-
-  Dev_Init();
 
   /* USER CODE END 2 */
 

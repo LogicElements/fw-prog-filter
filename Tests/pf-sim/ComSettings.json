@@ -1,5 +1,5 @@
 ﻿{
-    "comport": "COM4",
+    "comport": "COM7",
     "baud_rate": 19200,
     "stop_bits": 1,
     "parity": "E",

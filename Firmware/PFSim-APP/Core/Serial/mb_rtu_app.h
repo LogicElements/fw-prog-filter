@@ -92,8 +92,14 @@
 #define MB_HOLD_PF_CUTOFF_HP_1             12u
 #define MB_HOLD_PF_MODE                    13u
 #define MB_HOLD_PF_RESET                   14u
+#define MB_HOLD_PF_RESERVED                15u
+#define MB_HOLD_PF_DEF_CUTOFF_LP_0         16u
+#define MB_HOLD_PF_DEF_CUTOFF_LP_1         17u
+#define MB_HOLD_PF_DEF_CUTOFF_HP_0         18u
+#define MB_HOLD_PF_DEF_CUTOFF_HP_1         19u
+#define MB_HOLD_PF_DEF_MODE                20u
 
-#define MB_HOLD_LAST      14
+#define MB_HOLD_LAST      20
 
 
 /** @} */
@@ -131,4 +137,3 @@ Status_t MbRtu_WriteHoldingRegCallback(uint16_t address, uint16_t value);
 
 #endif /* MB_RTU_APP_H_ */
 /** @} */
-

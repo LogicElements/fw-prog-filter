@@ -326,10 +326,10 @@
     "Unit":"",
     "Label":"Filters mode",
     "EnumStr": [
-      "lowpass",
-      "highpass",
-      "bandpass",
-      "without filter"
+      "Low pass",
+      "High pass",
+      "Band pass",
+      "No filter"
     ],
     "EnumValue": [
       0,
@@ -337,7 +337,7 @@
       2,
       3
     ],
-    "Description":"Modbus RTU serial port - number of stop bits\r\nAllowed values: \r\nValue 0 - lowpass - active only low pass filter.\r\nValue 1 - highpass - active high pass filter and 100 kHz LP.\r\nValue 2 - bandpass - active high and low pass filter - recommended to set LP below or equal to 100kHz.\r\nValue 3 - without filter - bypass both filters.\r\n"
+    "Description":"Mode of filter band\r\nAllowed values: \r\nValue 0 - Low pass - Low pass filter.\r\nValue 1 - High pass - High pass filter with 100 kHz low pass.\r\nValue 2 - Band pass - Band pass filter.\r\nValue 3 - No filter - No filter.\r\n"
   },
   {
     "Type":"HOLD", 
@@ -352,6 +352,74 @@
     "Unit":"",
     "Label":"Reset filters",
     "Description":"Write 0 for reset. Switches off the power supply to the filters for 100ms."
+  },
+  {
+    "Type":"HOLD", 
+    "Name":"PF_RESERVED", 
+    "Id":83927377, 
+    "Address":[15],
+    "Format":"INT",
+    "Value":0,
+    "Access":"RW",
+    "Min":0,
+    "Max":0,
+    "Unit":"",
+    "Label":"Reserved",
+    "Description":"Reserve for future use"
+  },
+  {
+    "Type":"HOLD", 
+    "Name":"PF_DEF_CUTOFF_LP", 
+    "Id":83935602, 
+    "Address":[16, 17],
+    "Format":"INT",
+    "Value":100,
+    "Access":"RWF",
+    "Min":20,
+    "Max":320,
+    "Unit":"kHz",
+    "Label":"Default LP cutoff f",
+    "Description":"Default cutoff frequency of low pass filter after power on"
+  },
+  {
+    "Type":"HOLD", 
+    "Name":"PF_DEF_CUTOFF_HP", 
+    "Id":83951986, 
+    "Address":[18, 19],
+    "Format":"INT",
+    "Value":500,
+    "Access":"RWF",
+    "Min":300,
+    "Max":10000,
+    "Unit":"Hz",
+    "Label":"Default HP cutoff f",
+    "Description":"Default cutoff frequency of high pass filter after power on"
+  },
+  {
+    "Type":"HOLD", 
+    "Name":"PF_DEF_MODE", 
+    "Id":83969392, 
+    "Address":[20],
+    "Format":"ENUM",
+    "Value":0,
+    "Access":"RWF",
+    "Min":0,
+    "Max":3,
+    "Unit":"",
+    "Label":"Filters mode",
+    "EnumStr": [
+      "Low pass",
+      "High pass",
+      "Band pass",
+      "No filter"
+    ],
+    "EnumValue": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "Description":"Default mode of filter band\r\nAllowed values: \r\nValue 0 - Low pass - Low pass filter.\r\nValue 1 - High pass - High pass filter with 100 kHz low pass.\r\nValue 2 - Band pass - Band pass filter.\r\nValue 3 - No filter - No filter.\r\n"
   },
   {
     "Type":"INPUT", 

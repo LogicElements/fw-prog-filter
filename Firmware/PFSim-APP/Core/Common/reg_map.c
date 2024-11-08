@@ -35,10 +35,10 @@ conf_reg_t conf;
 uint8_t* const CONF_REG[CONF_REG_BLOCK_NUMBER] = {(uint8_t*)&conf.sys, (uint8_t*)&conf.fact, (uint8_t*)&conf.firm, (uint8_t*)&conf.com, NULL, (uint8_t*)&conf.pf, (uint8_t*)&conf.dbg, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, };
 
 const uint32_t CONF_REG_LIMIT[CONF_REG_BLOCK_NUMBER] = {
-22, 16, 8, 10, 0, 10, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, };
+22, 16, 8, 10, 0, 21, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, };
 
 const uint32_t CONF_REG_FLASH[CONF_REG_FLASH_NUMBER] = {
-CONF_SYS_REGMAP_VERSION, CONF_COM_MB_BAUD_RATE, CONF_COM_MB_PARITY, CONF_COM_MB_STOP_BITS, CONF_COM_MB_TIMEOUT, };
+CONF_SYS_REGMAP_VERSION, CONF_COM_MB_BAUD_RATE, CONF_COM_MB_PARITY, CONF_COM_MB_STOP_BITS, CONF_COM_MB_TIMEOUT, CONF_PF_DEF_CUTOFF_LP, CONF_PF_DEF_CUTOFF_HP, CONF_PF_DEF_MODE, };
 
 const uint32_t CONF_REG_LOGGER[CONF_REG_LOGGER_NUMBER] = {
 };
@@ -81,6 +81,9 @@ Status_t RegMap_RestoreFactoryValues(void)
   CONF_INT(CONF_PF_CUTOFF_HP)            = 500;
   CONF_BYTE(CONF_PF_MODE)                = 0;
   CONF_BYTE(CONF_PF_RESET)               = 1;
+  CONF_INT(CONF_PF_DEF_CUTOFF_LP)        = 100;
+  CONF_INT(CONF_PF_DEF_CUTOFF_HP)        = 500;
+  CONF_BYTE(CONF_PF_DEF_MODE)            = 0;
 
 
   return ret;
@@ -88,4 +91,3 @@ Status_t RegMap_RestoreFactoryValues(void)
 
 
 /** @} */
-

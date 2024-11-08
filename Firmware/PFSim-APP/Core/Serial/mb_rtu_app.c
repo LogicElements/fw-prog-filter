@@ -176,6 +176,24 @@ Status_t MbRtu_ReadHoldingRegCallback(uint16_t address, uint16_t *value)
     case MB_HOLD_PF_RESET:
       *value = conf.pf.reset;
       break;
+    case MB_HOLD_PF_RESERVED:
+      *value = conf.pf.reserved;
+      break;
+    case MB_HOLD_PF_DEF_CUTOFF_LP_0:
+      *value = *((uint16_t *)CONF_PTR(CONF_PF_DEF_CUTOFF_LP) + 0);
+      break;
+    case MB_HOLD_PF_DEF_CUTOFF_LP_1:
+      *value = *((uint16_t *)CONF_PTR(CONF_PF_DEF_CUTOFF_LP) + 1);
+      break;
+    case MB_HOLD_PF_DEF_CUTOFF_HP_0:
+      *value = *((uint16_t *)CONF_PTR(CONF_PF_DEF_CUTOFF_HP) + 0);
+      break;
+    case MB_HOLD_PF_DEF_CUTOFF_HP_1:
+      *value = *((uint16_t *)CONF_PTR(CONF_PF_DEF_CUTOFF_HP) + 1);
+      break;
+    case MB_HOLD_PF_DEF_MODE:
+      *value = conf.pf.def_mode;
+      break;
 
 
     default:
@@ -257,6 +275,28 @@ Status_t MbRtu_WriteHoldingRegCallback(uint16_t address, uint16_t value)
       conf.pf.reset = value;
       id = CONF_PF_RESET;
       break;
+    case MB_HOLD_PF_RESERVED:
+      conf.pf.reserved = value;
+      id = CONF_PF_RESERVED;
+      break;
+    case MB_HOLD_PF_DEF_CUTOFF_LP_0:
+      *((uint16_t *)CONF_PTR(CONF_PF_DEF_CUTOFF_LP) + 0) = value;
+      break;
+    case MB_HOLD_PF_DEF_CUTOFF_LP_1:
+      *((uint16_t *)CONF_PTR(CONF_PF_DEF_CUTOFF_LP) + 1) = value;
+      id = CONF_PF_DEF_CUTOFF_LP;
+      break;
+    case MB_HOLD_PF_DEF_CUTOFF_HP_0:
+      *((uint16_t *)CONF_PTR(CONF_PF_DEF_CUTOFF_HP) + 0) = value;
+      break;
+    case MB_HOLD_PF_DEF_CUTOFF_HP_1:
+      *((uint16_t *)CONF_PTR(CONF_PF_DEF_CUTOFF_HP) + 1) = value;
+      id = CONF_PF_DEF_CUTOFF_HP;
+      break;
+    case MB_HOLD_PF_DEF_MODE:
+      conf.pf.def_mode = (pf_def_mode_t)value;
+      id = CONF_PF_DEF_MODE;
+      break;
 
 
     default:
@@ -277,4 +317,3 @@ Status_t MbRtu_WriteHoldingRegCallback(uint16_t address, uint16_t value)
 
 
 /** @} */
-
